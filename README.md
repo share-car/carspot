@@ -9,10 +9,10 @@ Wireframing: **https://app.moqups.com/phhtrinh/uZqOAY2BP4/edit/page/ad64222d5**
 ## User Stories
 * [x] User can sign up by providing their email, password, and name.
 * [x] User can login using an email and password.
-* [x]  After logging in, the user can rent their car or rent any car
-* [x] User can find the cars
-* [x] User can see at least 5 car be renting in each page.
-* [x] User can filter by model, branch, price, rating....
+* [x] After logging in, user can rent their car or any car
+* [x] User can find cars
+* [x] User can see at least 5 cars be renting in each page.
+* [x] User can filter cars by model, branch, price, rating....
 * [x] User should be able to search for a menu item and see results.
 * [x] Clicking on a car in the index page brings up its detail, where user see the description and a larger picture, review, in additional user can see owner details.
 * [x] User can click “Book” on a car item to go to a “Create Order” page.
