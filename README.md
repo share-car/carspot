@@ -2,7 +2,8 @@
 
 **Carspot** is a Ruby on Rails Application use to rent a car.
 
-Submitted by: **Trung(Group4)*
+Submitted by: **Trung (Group4)**
+Editted by: **Trinh (Group4)**
 
 Wireframing: **https://app.moqups.com/phhtrinh/uZqOAY2BP4/edit/page/ad64222d5**
 
