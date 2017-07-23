@@ -1,0 +1,23 @@
+{
+  "name": "carspot",
+  "version": "1.0.0",
+  "description": "The car market for rent",
+  "scripts": {
+    "postinstall": "cd ui-module && npm install && quasar build"
+  },
+  "cacheDirectories": ["ui-module/node_modules"] ,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/share-car/carspot.git"
+  },
+  "keywords": [
+    "carspot",
+    "rent-car"
+  ],
+  "author": "Ha Ta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/share-car/carspot/issues"
+  },
+  "homepage": "https://github.com/share-car/carspot#readme"
+}

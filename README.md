@@ -1,7 +1,7 @@
 # Carspot Website
 
-**Carspot** is a Ruby on Rails Application use to rent a car.
-
+ * **Carspot** is a Ruby on Rails Application use to rent a car.
+ * Heroku link: **https://dev-carspot.herokuapp.com**
 ## Author
 * Submitted by: **Trung (Group4)**
 * Editted by: **Trinh (Group4)**
