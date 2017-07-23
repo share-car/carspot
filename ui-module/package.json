@@ -15,7 +15,7 @@
     "quasar-framework": "git+https://git@github.com/quasarframework/quasar-edge.git",
     "vue": "^2.3.0",
     "vue-router": "^2.0.0",
-    "postinstall": "./node_modules/.bin/gulp build"
+    "postinstall": "./node_modules/.bin/quasar build"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
