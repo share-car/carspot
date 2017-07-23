@@ -12,7 +12,6 @@
 /tmp/*
 /public/*
 /node_modules/*
-!/node_modules/.bin
 !/log/.keep
 !/tmp/.keep
 .byebug_history
