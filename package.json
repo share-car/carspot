@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "The car market for rent",
   "scripts": {
-    "postinstall": "cd ui-module && npm install && quasar build"
+    "postinstall": "cd ui-module && npm install"
   },
   "cacheDirectories": ["ui-module/node_modules"] ,
+  "engines": {
+    "node": "7.10"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/share-car/carspot.git"
