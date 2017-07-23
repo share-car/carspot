@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The car market for rent",
   "scripts": {
-    "postinstall": "npm install -g quasar-cli && cd ui-module && npm install"
+    "postinstall": "cd ui-module && npm install"
   },
   "cacheDirectories": ["ui-module/node_modules"] ,
   "engines": {
