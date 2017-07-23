@@ -7,7 +7,8 @@
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "build": "node build/script.build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "postinstall": "./node_modules/.bin/quasar build"
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
@@ -60,6 +61,7 @@
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.17.0",
-    "webpack-merge": "^4.0.0"
+    "webpack-merge": "^4.0.0",
+    "quasar-cli": "^0.6.2"
   }
 }
