@@ -31,7 +31,7 @@ Wireframing: **https://app.moqups.com/phhtrinh/uZqOAY2BP4/edit/page/ad64222d5**
             * License plate: 83F6-8472
             * Year: 2017
             * Branch: Mazda
-            * Chassi: Sedan, Station, Wagon, Hatchback, MPV, SUV, LCV 
+            * Chassi: Sedan, Station, Wagon, Hatchback, MPV, SUV, LCV
             * Engine: 1,496 cc
             * Horsepower: 184HP/5700rpm
             * Torque: 141Nm/3250rpm
@@ -53,13 +53,13 @@ Wireframing: **https://app.moqups.com/phhtrinh/uZqOAY2BP4/edit/page/ad64222d5**
     * [ ] View car detail
         * [ ] Car Image: all image
         * [ ] Car status: Publish/Unpuplish
-        * [ ] The car is renting or not with renter avatar 
+        * [ ] The car is renting or not with renter avatar
         * [ ] No of Waiting request
         * [ ] Car info
         * [ ] Rent setting
         * [ ] *Vote info*
         * [ ] *Car hisotries as timelife*
-* [ ] As login user I can view my reviews
+* [ ] As login user I can see my reviews
     * [ ] Search by model, license plate
     * [ ] *Filter by request status, from/to date*
     * [ ] *Order by model, license plate, base price, request status, date*
@@ -89,7 +89,7 @@ Wireframing: **https://app.moqups.com/phhtrinh/uZqOAY2BP4/edit/page/ad64222d5**
         * [ ] *Vote info*
     * [ ] View car detail
         * [ ] Car Image: all image
-        * [ ] The car is renting or not with renter avatar 
+        * [ ] The car is renting or not with renter avatar
         * [ ] No of Waiting request
         * [ ] Car info
         * [ ] Rent setting
