@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724033838) do
+ActiveRecord::Schema.define(version: 20170724122623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "type", limit: 255, null: false
+    t.string "name", limit: 255, null: false
+    t.string "description", limit: 1000
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_attachments_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name", limit: 255, null: false
+    t.string "last_name", limit: 255, null: false
+    t.string "address", limit: 1000
+    t.string "phone", limit: 12
+    t.string "identity_card", limit: 255
+    t.bigint "user_id"
+    t.bigint "attachment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attachment_id"], name: "index_profiles_on_attachment_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -44,4 +68,7 @@ ActiveRecord::Schema.define(version: 20170724033838) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "attachments", "users"
+  add_foreign_key "profiles", "attachments"
+  add_foreign_key "profiles", "users"
 end
