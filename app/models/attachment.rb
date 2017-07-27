@@ -1,7 +1,3 @@
 class Attachment < ApplicationRecord
-
-    belongs_to :user
-    
-    class ImageAttachment < Attachment
-    end
+  belongs_to :user
 end
