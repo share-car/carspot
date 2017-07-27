@@ -33,6 +33,11 @@
 * Run `rails db:migrate` to build migrate db
 * Run `rails s` to start server
 
+### Generator
+* Rspec controller: `rails g rspec:controller Api::V1::Users`
+* FactoryGirl `rails g factory_girl:model User`
+* Serializer `rails g serializer User`
+
 ### Deploy heroku
 * Clone code from github and check out master
     * `git clone https://github.com/share-car/carspot.git`
