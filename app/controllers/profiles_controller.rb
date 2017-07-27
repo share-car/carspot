@@ -3,4 +3,9 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     render json: @profile
   end
+
+  def create
+    # TODO
+  end
+
 end
