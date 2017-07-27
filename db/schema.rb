@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724122623) do
+ActiveRecord::Schema.define(version: 20170726125440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20170724122623) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_attachments_on_user_id"
+  end
+
+  create_table "meta_sources", force: :cascade do |t|
+    t.string "type", limit: 255, null: false
+    t.string "label", limit: 255, null: false
+    t.string "value", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -68,7 +76,35 @@ ActiveRecord::Schema.define(version: 20170724122623) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "vehicles", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.string "type", limit: 255
+    t.string "model", limit: 255
+    t.string "license_plate", limit: 50
+    t.integer "year"
+    t.string "branch", limit: 50
+    t.string "description", limit: 1000
+    t.boolean "rent_publish"
+    t.bigint "chassi_id"
+    t.bigint "engine"
+    t.string "horsepower", limit: 50
+    t.integer "doors", limit: 2
+    t.integer "seats", limit: 2
+    t.bigint "transmission_id"
+    t.bigint "fuel_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chassi_id"], name: "index_vehicles_on_chassi_id"
+    t.index ["fuel_type_id"], name: "index_vehicles_on_fuel_type_id"
+    t.index ["owner_id"], name: "index_vehicles_on_owner_id"
+    t.index ["transmission_id"], name: "index_vehicles_on_transmission_id"
+  end
+
   add_foreign_key "attachments", "users"
   add_foreign_key "profiles", "attachments"
   add_foreign_key "profiles", "users"
+  add_foreign_key "vehicles", "meta_sources", column: "chassi_id"
+  add_foreign_key "vehicles", "meta_sources", column: "fuel_type_id"
+  add_foreign_key "vehicles", "meta_sources", column: "transmission_id"
+  add_foreign_key "vehicles", "users", column: "owner_id"
 end

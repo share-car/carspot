@@ -1,0 +1,2 @@
+class Transmission < MetaSource
+end
