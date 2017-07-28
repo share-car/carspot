@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :vehicle do
+  factory :request_setting do
     
   end
 end
