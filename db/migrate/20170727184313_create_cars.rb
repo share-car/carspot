@@ -1,7 +1,6 @@
 class CreateCars < ActiveRecord::Migration[5.1]
   def change
     create_table :cars do |t|
-      t.references :vehicle_info, foreign_key: true
       t.string :engine, limit: 50
       t.string :horsepower, limit: 50
       t.string :torque, limit: 50

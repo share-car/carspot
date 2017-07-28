@@ -5,13 +5,13 @@ module Api
       before_action :current_profile, only: [:me, :update]
 
       def me
-        render json: @profile
+        response_success(@profile)
       end
 
       def show
         @profile = Profile.find_by(id: params[:id])
         @profile = Profile.new unless @profile.present?
-        render json: @profile
+        response_success(@profile)
       end
 
       def update
