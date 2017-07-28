@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170727201415) do
+ActiveRecord::Schema.define(version: 20170728080634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20170727201415) do
   end
 
   create_table "cars", force: :cascade do |t|
-    t.bigint "vehicle_info_id"
     t.string "engine", limit: 50
     t.string "horsepower", limit: 50
     t.string "torque", limit: 50
@@ -41,7 +40,6 @@ ActiveRecord::Schema.define(version: 20170727201415) do
     t.index ["chassi_id"], name: "index_cars_on_chassi_id"
     t.index ["fuel_type_id"], name: "index_cars_on_fuel_type_id"
     t.index ["transmission_id"], name: "index_cars_on_transmission_id"
-    t.index ["vehicle_info_id"], name: "index_cars_on_vehicle_info_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -80,23 +78,19 @@ ActiveRecord::Schema.define(version: 20170727201415) do
     t.string "phone", limit: 12
     t.string "identity_card", limit: 255
     t.bigint "user_id"
-    t.bigint "attachment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["attachment_id"], name: "index_profiles_on_attachment_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "rent_requests", force: :cascade do |t|
     t.bigint "vehicle_info_id"
-    t.bigint "rent_setting_id"
     t.bigint "user_id"
     t.bigint "status_id"
     t.date "from_date", null: false
     t.date "to_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rent_setting_id"], name: "index_rent_requests_on_rent_setting_id"
     t.index ["status_id"], name: "index_rent_requests_on_status_id"
     t.index ["user_id"], name: "index_rent_requests_on_user_id"
     t.index ["vehicle_info_id"], name: "index_rent_requests_on_vehicle_info_id"
@@ -153,7 +147,7 @@ ActiveRecord::Schema.define(version: 20170727201415) do
   end
 
   create_table "vehicle_infos", force: :cascade do |t|
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.string "model", limit: 255, null: false
     t.string "license_plate", limit: 50, null: false
     t.integer "year", null: false
@@ -164,9 +158,7 @@ ActiveRecord::Schema.define(version: 20170727201415) do
     t.bigint "vehicle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "rent_setting_id"
-    t.index ["rent_setting_id"], name: "index_vehicle_infos_on_rent_setting_id"
-    t.index ["users_id"], name: "index_vehicle_infos_on_users_id"
+    t.index ["user_id"], name: "index_vehicle_infos_on_user_id"
     t.index ["vehicle_type", "vehicle_id"], name: "index_vehicle_infos_on_vehicle_type_and_vehicle_id"
   end
 
@@ -174,16 +166,12 @@ ActiveRecord::Schema.define(version: 20170727201415) do
   add_foreign_key "cars", "meta_sources", column: "chassi_id"
   add_foreign_key "cars", "meta_sources", column: "fuel_type_id"
   add_foreign_key "cars", "meta_sources", column: "transmission_id"
-  add_foreign_key "cars", "vehicle_infos"
   add_foreign_key "comments", "users"
   add_foreign_key "custom_prices", "rent_settings"
-  add_foreign_key "profiles", "attachments"
   add_foreign_key "profiles", "users"
   add_foreign_key "rent_requests", "meta_sources", column: "status_id"
-  add_foreign_key "rent_requests", "rent_settings"
   add_foreign_key "rent_requests", "users"
   add_foreign_key "rent_requests", "vehicle_infos"
   add_foreign_key "service_options", "rent_settings"
-  add_foreign_key "vehicle_infos", "rent_settings"
-  add_foreign_key "vehicle_infos", "users", column: "users_id"
+  add_foreign_key "vehicle_infos", "users"
 end

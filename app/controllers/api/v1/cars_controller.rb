@@ -3,12 +3,12 @@ module Api
     class CarsController < ApplicationController
       def index
         @cars = Car.all
-        paginate json: @cars, include: ['owner', 'chassi', 'transmission', 'fuel_type'], fields: { users: [:name] }
+        response_paging(@cars, ['user', 'vehicle_info', 'chassi', 'transmission', 'fuel_type'], { users: [:name] })
       end
       
       def show
         @car = Car.find(params[:id])
-        render json: @car, include: ['owner', 'chassi', 'transmission', 'fuel_type'], fields: { users: [:name] }
+        response_success(@car, ['user', 'vehicle_info','chassi', 'transmission', 'fuel_type'], { users: [:name] })
       end
     end
   end
