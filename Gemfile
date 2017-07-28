@@ -22,6 +22,7 @@ gem 'jwt'
 gem 'active_model_serializers', '~> 0.10.6'
 gem "omniauth"
 gem "devise_token_auth"
+gem 'rack-cors', :require => 'rack/cors'
 gem 'will_paginate', '~> 3.1.0'
 gem 'api-pagination'
 

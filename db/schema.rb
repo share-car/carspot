@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170727201415) do
+ActiveRecord::Schema.define(version: 20170728040503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,10 +80,8 @@ ActiveRecord::Schema.define(version: 20170727201415) do
     t.string "phone", limit: 12
     t.string "identity_card", limit: 255
     t.bigint "user_id"
-    t.bigint "attachment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["attachment_id"], name: "index_profiles_on_attachment_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -177,7 +175,6 @@ ActiveRecord::Schema.define(version: 20170727201415) do
   add_foreign_key "cars", "vehicle_infos"
   add_foreign_key "comments", "users"
   add_foreign_key "custom_prices", "rent_settings"
-  add_foreign_key "profiles", "attachments"
   add_foreign_key "profiles", "users"
   add_foreign_key "rent_requests", "meta_sources", column: "status_id"
   add_foreign_key "rent_requests", "rent_settings"
