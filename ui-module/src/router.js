@@ -22,7 +22,11 @@ export default new VueRouter({
    */
 
   routes: [
-    { path: '/', component: load('Hello') },
+    { path: '/', redirect: '/home' },
+    { path: '/home', component: load('Home') },
+    { path: '/login', component: load('Login') },
+    { path: '/register', component: load('Register') },
+    { path: '/profile', component: load('Profile') },
 
     // Always leave this last one
     { path: '*', component: load('Error404') } // Not found
