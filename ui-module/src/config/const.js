@@ -1,8 +1,7 @@
 export default {
   MUTATION_TYPES: {
     AUTH: {
-      LOGIN_SUCCESS: 'loginSuccess',
-      LOGIN_ERROR: 'loginError',
+      AUTHENTICATED_USER: 'authenticatedUser',
       LOGOUT: 'logout'
     }
   },

@@ -22,7 +22,7 @@ export default {
     }
   },
   mutations: {
-    [CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS] (state, payload) {
+    [CONST.MUTATION_TYPES.AUTH.AUTHENTICATED_USER] (state, payload) {
       const user = payload
       state.user.id = user.id
       state.user.uid = user.uid
@@ -51,7 +51,7 @@ export default {
           email: payload.email,
           password: payload.password
         })
-        await context.commit(CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS, response.data.data)
+        await context.commit(CONST.MUTATION_TYPES.AUTH.AUTHENTICATED_USER, response.data.data)
       }
       catch (e) {
         console.log(e)
@@ -82,7 +82,7 @@ export default {
           password: payload.password,
           password_confirmation: payload.password_confirmation
         })
-        await context.commit(CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS, {data: response.data.data, headers: response.headers})
+        await context.commit(CONST.MUTATION_TYPES.AUTH.AUTHENTICATED_USER, response.data.data)
       }
       catch (e) {
         console.log(e)
