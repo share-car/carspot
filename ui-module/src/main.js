@@ -15,7 +15,7 @@ import Quasar from 'quasar'
 import { sync } from 'vuex-router-sync'
 import router from './router'
 import store from './store'
-import axios from 'axios'
+import axios from './config/axios'
 import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false

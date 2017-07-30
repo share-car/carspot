@@ -1,28 +1,20 @@
-import {LocalStorage} from 'quasar'
-import CONST from '../const'
+import { LocalStorage } from 'quasar'
+import CONST from '../config/const'
 
 export default class {
-  static set token (token) {
-    LocalStorage.set(CONST.AUTH.TOKEN, token)
+  static set token (headers) {
+    let token = CONST.AUTH.TOKEN.HEADER.reduce(function (obj, value) {
+      obj[value] = headers[value]
+      return obj
+    }, {})
+    LocalStorage.set(CONST.AUTH.TOKEN.NAME, token)
   }
 
   static get token () {
-    return LocalStorage.get.item(CONST.AUTH.TOKEN)
+    return LocalStorage.get.item(CONST.AUTH.TOKEN.NAME)
   }
 
   static removeToken () {
-    LocalStorage.remove(CONST.AUTH.TOKEN)
-  }
-
-  static set client (client) {
-    LocalStorage.set(CONST.AUTH.CLIENT, client)
-  }
-
-  static get client () {
-    return LocalStorage.get.item(CONST.AUTH.CLIENT)
-  }
-
-  static removeClient () {
-    LocalStorage.remove(CONST.AUTH.CLIENT)
+    LocalStorage.remove(CONST.AUTH.TOKEN.NAME)
   }
 }

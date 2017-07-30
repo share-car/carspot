@@ -1,6 +1,14 @@
-import CONST from '../../const'
+import CONST from '../../config/const'
 import Storage from '../../storage'
 import Vue from 'vue'
+
+function getPath (path) {
+  return CONST.AUTH.PATH.BASE + path
+}
+
+const loginPath = getPath(CONST.AUTH.PATH.LOGIN)
+const logoutPath = getPath(CONST.AUTH.PATH.LOGOUT)
+const registerPath = getPath(CONST.AUTH.PATH.REGISTER)
 
 export default {
   namespaced: true,
@@ -15,20 +23,18 @@ export default {
   },
   mutations: {
     [CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS] (state, payload) {
-      const headers = payload.headers
-      Storage.token = headers['access-token']
-      Storage.client = headers['client']
-      const user = payload.data
+      const user = payload
       state.user.id = user.id
       state.user.uid = user.uid
       state.user.name = user.name
       state.user.email = user.email
-      state.isAuthenticated = true
+      if (Storage.token) {
+        state.isAuthenticated = true
+      }
     },
 
-    [CONST.MUTATION_TYPES.AUTH.LOGOUT] (state, payload) {
+    [CONST.MUTATION_TYPES.AUTH.LOGOUT] (state) {
       Storage.removeToken()
-      Storage.removeClient()
       state.user.id = null
       state.user.uid = null
       state.user.name = 'Guest'
@@ -41,12 +47,11 @@ export default {
     async login (context, payload) {
       let result = true
       try {
-        let response = await Vue.axios.post('/auth/sign_in', {
+        let response = await Vue.axios.post(loginPath, {
           email: payload.email,
           password: payload.password
         })
-        await context.commit(CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS, {data: response.data.data, headers: response.headers})
-        return true
+        await context.commit(CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS, response.data.data)
       }
       catch (e) {
         console.log(e)
@@ -55,9 +60,35 @@ export default {
       return result
     },
 
-    async logout ({state, commit, rootState}) {
-      await commit(CONST.MUTATION_TYPES.AUTH.LOGOUT)
-      rootState.router.push('/login')
+    async logout ({commit}) {
+      let result = true
+      try {
+        await Vue.axios.delete(logoutPath)
+        await commit(CONST.MUTATION_TYPES.AUTH.LOGOUT)
+      }
+      catch (e) {
+        console.log(e)
+        result = false
+      }
+      return result
+    },
+
+    async register (context, payload) {
+      let result = true
+      try {
+        let response = await Vue.axios.post(registerPath, {
+          name: payload.name,
+          email: payload.email,
+          password: payload.password,
+          password_confirmation: payload.password_confirmation
+        })
+        await context.commit(CONST.MUTATION_TYPES.AUTH.LOGIN_SUCCESS, {data: response.data.data, headers: response.headers})
+      }
+      catch (e) {
+        console.log(e)
+        result = false
+      }
+      return result
     }
   }
 }
