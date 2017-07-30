@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   namespace :api, format: 'json' do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       get 'profiles/me', to: 'profiles#me'
-      resources :profiles
+      put 'profiles/me', to: 'profiles#update'
+      resources :profiles, only: [:show]
       resources :attachments
       resources :users
       resources :cars

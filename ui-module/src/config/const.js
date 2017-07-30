@@ -1,20 +1,28 @@
 export default {
-  MUTATION_TYPES: {
-    AUTH: {
-      AUTHENTICATED_USER: 'authenticatedUser',
-      LOGOUT: 'logout'
-    }
-  },
+  API_PATH: '/api',
   AUTH: {
     PATH: {
       BASE: '/auth',
-      LOGIN: '/sign_in',
-      LOGOUT: '/sign_out',
-      REGISTER: ''
+      LOGIN: '/auth/sign_in',
+      LOGOUT: '/auth/sign_out',
+      REGISTER: '/auth'
+    },
+    MUTATION_TYPES: {
+      AUTHENTICATED_USER: 'authenticatedUser',
+      LOGOUT: 'logout'
     },
     TOKEN: {
       NAME: 'carspot_header',
       HEADER: ['access-token', 'client', 'uid', 'expiry', 'token-type']
+    }
+  },
+  PROFILE: {
+    PATH: {
+      BASE: '/profiles',
+      ME: '/profiles/me'
+    },
+    MUTATION_TYPES: {
+      UPDATE_PROFILE: 'updateProfile'
     }
   }
 }
