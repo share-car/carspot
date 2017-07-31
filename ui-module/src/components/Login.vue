@@ -1,48 +1,34 @@
 <template>
-  <div class="row justify-center content-center items-center">
-    <q-card class="col-4">
-      <q-card-title>
-        <div class="text-primary row justify-center">
-          Login Form
-        </div>
-      </q-card-title>
-      <q-card-main>
+  <form-layout title="Login Form" styleClass="col-4">
+    <q-field icon="email" :labelWidth="1">
+      <q-input v-model="user.email" type="email" float-label="Email" :clearable="true" />
+    </q-field>
   
-        <q-field icon="email" :labelWidth="1">
-          <q-input v-model="user.email" type="email" float-label="Email" :clearable="true" />
-        </q-field>
+    <q-field icon="vpn_key" :labelWidth="1">
+      <q-input v-model="user.password" type="password" float-label="Password" />
+    </q-field>
   
-        <q-field icon="vpn_key" :labelWidth="1">
-          <q-input v-model="user.password" type="password" float-label="Password" />
-        </q-field>
-  
-        <q-field icon="none" :labelWidth="1">
-          <q-btn color="primary" icon="input" @click="login">Login</q-btn>
-          <q-btn color="secondary" icon="autorenew" @click="reset">Reset</q-btn>
-        </q-field>
-      </q-card-main>
-    </q-card>
-  </div>
+    <q-field icon="none" :labelWidth="1">
+      <q-btn color="primary" icon="input" @click="login">Login</q-btn>
+      <q-btn color="secondary" icon="autorenew" @click="reset">Reset</q-btn>
+    </q-field>
+  </form-layout>
 </template>
 
 <script>
 
 import {
-  QCard,
-  QCardTitle,
-  QCardMain,
   QBtn,
   QField,
   QInput
 } from 'quasar'
 
-import {alert} from '../utils'
+import { alert } from '../utils'
+import FormLayout from '../layouts/Form'
 
 export default {
   components: {
-    QCard,
-    QCardTitle,
-    QCardMain,
+    FormLayout,
     QBtn,
     QField,
     QInput
@@ -66,7 +52,8 @@ export default {
       let result = await this.$store.dispatch('auth/login', this.user)
       if (result) {
         alert.success('Login success', 'verified_user')
-        this.$router.push('/home')
+        let redirect = this.$route.query.redirect || 'home'
+        this.$router.replace(redirect)
       }
       else {
         alert.error('Email or password is invalid')
