@@ -12,7 +12,7 @@
         </div>
         <div class="row xs-gutter">
           <q-field class="col-6">
-            <q-input v-model="profile.phone" type="number" float-label="Phone" :clearable="true" max-length="255" />
+            <q-input v-model="profile.phone" type="text" float-label="Phone" :clearable="true" max-length="255" />
           </q-field>
           <q-field class="col-6">
             <q-input v-model="profile.identity_card" type="text" float-label="Identity Card" :clearable="true" max-length="255" />
@@ -23,7 +23,7 @@
         </q-field>
   
         <q-field>
-          <q-btn flat color="primary" icon="check_circle" @click="submit">Submit</q-btn>
+          <q-btn flat color="primary" icon="check_circle" @click="updateContact">Update</q-btn>
           <q-btn flat color="secondary" icon="cancel" @click="cancel">Cancel</q-btn>
         </q-field>
       </q-collapsible>
@@ -62,6 +62,7 @@ import {
   QCollapsible
 } from 'quasar'
 
+import { alert } from '../utils'
 import FormLayout from '../layouts/Form'
 import { mapState, mapActions } from 'vuex'
 
@@ -78,6 +79,7 @@ export default {
   data () {
     return {
       profile: {
+        id: '',
         first_name: '',
         last_name: '',
         address: '',
@@ -95,20 +97,31 @@ export default {
     ...mapState('auth', ['user'])
   },
 
-  async created () {
-    if (await this.loadProfile()) {
-      this.profile = Object.assign(this.profile, this.$store.state.profile.data)
-    }
+  created () {
+    this.loadData()
   },
 
   methods: {
-    ...mapActions('profile', ['loadProfile']),
+    ...mapActions('profile', ['loadProfile', 'updateProfile']),
+
+    async loadData () {
+      if (await this.loadProfile()) {
+        this.profile = Object.assign(this.profile, this.$store.state.profile.data)
+      }
+    },
 
     cancel () {
       this.loadData()
     },
 
-    submit () {
+    async updateContact () {
+      let result = await this.updateProfile(this.profile)
+      if (result) {
+        alert.success('Update contact success')
+      }
+      else {
+        alert.error('There are some errors on server, please check again later')
+      }
     },
 
     changePassword () {

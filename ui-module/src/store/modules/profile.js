@@ -1,15 +1,16 @@
 import CONST from '../../config/const'
-import { ProfileDeserializer } from '../../config/json-api'
+import { ProfileDeserializer, ProfileSerializer } from '../../config/json-api'
 import Vue from 'vue'
 
 export default {
   namespaced: true,
   state: {
     data: {
-      firstName: '',
-      lastName: '',
-      phone: null,
-      identityCard: null,
+      id: '',
+      first_name: '',
+      last_name: '',
+      phone: '',
+      identity_card: '',
       address: ''
     }
   },
@@ -24,8 +25,10 @@ export default {
       let result = true
       try {
         let response = await Vue.axios.get(CONST.API_PATH + CONST.PROFILE.PATH.ME)
-        let profile = await ProfileDeserializer.deserialize(response.data)
-        await context.commit(CONST.PROFILE.MUTATION_TYPES.UPDATE_PROFILE, profile)
+        if (response.data.data) {
+          let profile = await ProfileDeserializer.deserialize(response.data)
+          await context.commit(CONST.PROFILE.MUTATION_TYPES.UPDATE_PROFILE, profile)
+        }
       }
       catch (e) {
         console.log(e)
@@ -37,9 +40,12 @@ export default {
     async updateProfile (context, payload) {
       let result = true
       try {
-        let response = await Vue.axios.post(CONST.API_PATH + CONST.PROFILE.PATH.ME, payload)
-        let profile = await ProfileDeserializer.deserialize(response.data)
-        await context.commit(CONST.PROFILE.MUTATION_TYPES.UPDATE_PROFILE, profile)
+        let profile = await ProfileSerializer.serialize(payload)
+        let response = await Vue.axios.put(CONST.API_PATH + CONST.PROFILE.PATH.ME, profile)
+        if (response.data.data) {
+          profile = await ProfileDeserializer.deserialize(response.data)
+          await context.commit(CONST.PROFILE.MUTATION_TYPES.UPDATE_PROFILE, profile)
+        }
       }
       catch (e) {
         console.log(e)

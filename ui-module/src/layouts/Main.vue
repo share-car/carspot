@@ -52,7 +52,7 @@ import {
   QBtn
 } from 'quasar'
 
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -73,7 +73,8 @@ export default {
   },
 
   computed: {
-    ...mapState('auth', ['isAuthenticated', 'user'])
+    ...mapState('auth', ['user']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
 
   methods: {

@@ -14,7 +14,7 @@ export default class {
     this.message(msg, 'positive', icon)
   }
 
-  static message (msg, color, icon = null, position = 'right', duration = 2000) {
+  static message (msg, color, icon = null, position = 'top-right', duration = 2000) {
     const alert = Alert.create({
       enter: 'fadeInDown',
       leave: 'fadeOutRight',
