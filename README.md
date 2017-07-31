@@ -32,6 +32,7 @@
 * Run `rails db:create` to build create db
 * Run `rails db:migrate` to build migrate db
 * Run `rails s` to start server
+* Run `quasar dev` to start front end server as dev with config proxy to back end in `ui-module/config/index.js` with key as `dev.proxyTable '/api' target` 
 
 ### Generator
 * Rspec controller: `rails g rspec:controller Api::V1::Users`

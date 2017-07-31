@@ -1,7 +1,8 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <router-view />
+    <main-layout>
+    </main-layout>
   </div>
 </template>
 
@@ -9,7 +10,16 @@
 /*
  * Root component
  */
-export default {}
-</script>
+import MainLayout from './layouts/Main'
 
-<style></style>
+export default {
+  components: {
+    MainLayout
+  },
+
+  data () {
+    return {
+    }
+  }
+}
+</script>
