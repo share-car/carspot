@@ -26,7 +26,7 @@ const router = new VueRouter({
     { path: '/', name: 'root', redirect: '/home' },
     { path: '/home', name: 'home', component: load('Home') },
     { path: '/login', name: 'login', component: load('Login'), meta: { auth: false } },
-    { path: '/register', name: 'register', component: load('Register'), meta: { auth: true } },
+    { path: '/register', name: 'register', component: load('Register'), meta: { auth: false } },
     { path: '/my-requests', name: 'my-requests', component: load('My-Requests'), meta: { auth: true } },
     { path: '/profile', name: 'profile', component: load('Profile'), meta: { auth: true } },
     { path: '/403', name: '403', component: load('Error403') },
