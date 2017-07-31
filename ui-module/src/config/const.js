@@ -9,7 +9,7 @@ export default {
     },
     MUTATION_TYPES: {
       AUTHENTICATED_USER: 'authenticatedUser',
-      LOGOUT: 'logout'
+      RESET_USER: 'logout'
     },
     TOKEN: {
       NAME: 'carspot_header',

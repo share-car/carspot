@@ -52,7 +52,8 @@ export default {
       let result = await this.$store.dispatch('auth/login', this.user)
       if (result) {
         alert.success('Login success', 'verified_user')
-        this.$router.push('/home')
+        let redirect = this.$route.query.redirect || 'home'
+        this.$router.replace(redirect)
       }
       else {
         alert.error('Email or password is invalid')

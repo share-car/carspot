@@ -5,25 +5,33 @@ import Vue from 'vue'
 export default {
   namespaced: true,
   state: {
-    isAuthenticated: false,
     user: {
       id: null,
       name: 'Guest',
       email: null
     }
   },
+
+  getters: {
+    isAuthenticated: state => {
+      let isAuthenticated = false
+      let token = Storage.token
+      if (state.user.id && token && token['access-token']) {
+        isAuthenticated = true
+      }
+      return isAuthenticated
+    }
+  },
+
   mutations: {
     [CONST.AUTH.MUTATION_TYPES.AUTHENTICATED_USER] (state, payload) {
       const user = payload
       state.user.id = user.id
       state.user.name = user.name
       state.user.email = user.email
-      if (Storage.token) {
-        state.isAuthenticated = true
-      }
     },
 
-    [CONST.AUTH.MUTATION_TYPES.LOGOUT] (state) {
+    [CONST.AUTH.MUTATION_TYPES.RESET_USER] (state) {
       Storage.removeToken()
       state.user.id = null
       state.user.name = 'Guest'
@@ -33,14 +41,15 @@ export default {
   },
 
   actions: {
-    async login (context, payload) {
+    async login ({commit}, payload) {
       let result = true
       try {
+        await commit(CONST.AUTH.MUTATION_TYPES.RESET_USER)
         let response = await Vue.axios.post(CONST.AUTH.PATH.LOGIN, {
           email: payload.email,
           password: payload.password
         })
-        await context.commit(CONST.AUTH.MUTATION_TYPES.AUTHENTICATED_USER, response.data.data)
+        await commit(CONST.AUTH.MUTATION_TYPES.AUTHENTICATED_USER, response.data.data)
       }
       catch (e) {
         console.log(e)
@@ -53,7 +62,7 @@ export default {
       let result = true
       try {
         await Vue.axios.delete(CONST.AUTH.PATH.LOGOUT)
-        await commit(CONST.AUTH.MUTATION_TYPES.LOGOUT)
+        await commit(CONST.AUTH.MUTATION_TYPES.RESET_USER)
       }
       catch (e) {
         console.log(e)
@@ -62,7 +71,7 @@ export default {
       return result
     },
 
-    async register (context, payload) {
+    async register ({commit}, payload) {
       let result = true
       try {
         let response = await Vue.axios.post(CONST.AUTH.PATH.REGISTER, {
@@ -71,7 +80,7 @@ export default {
           password: payload.password,
           password_confirmation: payload.password_confirmation
         })
-        await context.commit(CONST.AUTH.MUTATION_TYPES.AUTHENTICATED_USER, response.data.data)
+        await commit(CONST.AUTH.MUTATION_TYPES.AUTHENTICATED_USER, response.data.data)
       }
       catch (e) {
         console.log(e)
