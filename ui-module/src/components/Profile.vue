@@ -1,8 +1,39 @@
 <template>
   <form-layout title="Profile" styleClass="col-8">
-    <q-list separator>
-      <q-collapsible icon="contacts" opened label="Contacts">
-        <div class="row xs-gutter">
+    
+        <div class="row md-gutter">
+          <div class="col-4">
+            <div class="profile">
+              <img :src="'/statics/quasar-logo.png'" class="avatar fit">
+              <uploader source-type='User' :source-id="user.id"/>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="row md-gutter">
+              <q-field class="col-6" icon="perm_identity" :labelWidth="1">
+                <q-input :value="user.name" type="text" float-label="Name" max-length="255" :disable="true" />
+              </q-field>
+              <q-field class="col-6" icon="email" :labelWidth="1">
+                <q-input :value="user.email" type="email" float-label="Email" max-length="255" :disable="true" />
+              </q-field>
+            </div>
+            <div class="row md-gutter">
+              <q-field class="col-6" icon="vpn_key" :labelWidth="1">
+                <q-input v-model="form.password" type="password" float-label="Password" max-length="255" />
+              </q-field>
+              <q-field class="col-6" icon="replay" :labelWidth="1">
+                <q-input v-model="form.password_confirmation" type="password" float-label="Password Confirmation" max-length="255" />
+              </q-field>
+            </div>
+            <div class="row md-gutter">
+              <q-field class="offset-6">
+                <q-btn color="primary" icon="update" @click="changePassword">Change Password</q-btn>
+              </q-field>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row md-gutter">
           <q-field class="col-6">
             <q-input v-model="profile.first_name" type="text" float-label="First name" :clearable="true" max-length="255" />
           </q-field>
@@ -10,7 +41,7 @@
             <q-input v-model="profile.last_name" type="text" float-label="Last name" :clearable="true" max-length="255" />
           </q-field>
         </div>
-        <div class="row xs-gutter">
+        <div class="row md-gutter">
           <q-field class="col-6">
             <q-input v-model="profile.phone" type="text" float-label="Phone" :clearable="true" max-length="255" />
           </q-field>
@@ -23,32 +54,9 @@
         </q-field>
   
         <q-field>
-          <q-btn flat color="primary" icon="check_circle" @click="updateContact">Update</q-btn>
-          <q-btn flat color="secondary" icon="cancel" @click="cancel">Cancel</q-btn>
+          <q-btn color="primary" icon="check_circle" @click="updateContact">Update</q-btn>
+          <q-btn color="secondary" icon="cancel" @click="cancel">Cancel</q-btn>
         </q-field>
-      </q-collapsible>
-      <q-collapsible icon="account_circle" opened label="Account">
-        <div class="row xs-gutter">
-          <q-field class="col-6" icon="perm_identity" :labelWidth="1">
-            <q-input :value="user.name" type="text" float-label="Name" max-length="255" :disable="true" />
-          </q-field>
-          <q-field class="col-6" icon="email" :labelWidth="1">
-            <q-input :value="user.email" type="email" float-label="Email" max-length="255" :disable="true" />
-          </q-field>
-        </div>
-        <div class="row xs-gutter">
-          <q-field class="col-6" icon="vpn_key" :labelWidth="1">
-            <q-input v-model="form.password" type="password" float-label="Password" max-length="255" />
-          </q-field>
-          <q-field class="col-6" icon="replay" :labelWidth="1">
-            <q-input v-model="form.password_confirmation" type="password" float-label="Password Confirmation" max-length="255" />
-          </q-field>
-        </div>
-        <q-field>
-          <q-btn flat color="primary" icon="update" @click="changePassword">Change Password</q-btn>
-        </q-field>
-      </q-collapsible>
-    </q-list>
   </form-layout>
 </template>
 
@@ -57,13 +65,12 @@
 import {
   QBtn,
   QField,
-  QInput,
-  QList,
-  QCollapsible
+  QInput
 } from 'quasar'
 
 import { alert } from '../utils'
 import FormLayout from '../layouts/Form'
+import Uploader from './commons/Uploader'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -72,8 +79,7 @@ export default {
     QBtn,
     QField,
     QInput,
-    QList,
-    QCollapsible
+    Uploader
   },
 
   data () {
@@ -129,3 +135,11 @@ export default {
   }
 }
 </script>
+<style lang="stylus">
+@import '~variables'
+.profile
+  border-style inset
+  border-width 2px
+  border-color $neutral
+  padding 5px
+</style>

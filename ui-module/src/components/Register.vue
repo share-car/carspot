@@ -61,7 +61,7 @@ export default {
     user: {
       name: { required, minLength: minLength(4) },
       email: { required, email },
-      password: { required, minLength: minLength(6) },
+      password: { required, minLength: minLength(8) },
       password_confirmation: { required, sameAsPassword: sameAs('password') }
     }
   },
@@ -83,7 +83,7 @@ export default {
           this.$router.push('/home')
         }
         else {
-          alert.error('Your email is already exited')
+          alert.error('Your email already exists')
         }
       }
       else {
