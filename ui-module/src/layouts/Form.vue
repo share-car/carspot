@@ -8,6 +8,7 @@
       <q-card-main>
         <slot>Content</slot>
       </q-card-main>
+      <slot name="actions"></slot>
     </q-card>
   </div>
 </template>
@@ -33,7 +34,6 @@ export default {
       type: String,
       required: true
     },
-    // a number with default value
     title: {
       type: String,
       required: true
